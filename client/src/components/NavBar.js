@@ -12,11 +12,12 @@ function NavBar() {
         <li>
           <NavLink to="add-reviews">Add Reviews</NavLink>
         </li>
-        {/* <li><NavLink to="about">About</NavLink></li>
-                <li><NavLink to="users">Users</NavLink></li>
-                <li><NavLink to="/add-user">Add User</NavLink></li>
-                <li><NavLink to="plans">Plans</NavLink></li>
-                <li><NavLink to="bad-route">Bad!</NavLink></li> */}
+        <li>
+          <NavLink to="users">Users</NavLink>
+        </li>
+        <li>
+          <NavLink to="bad-route">Bad!</NavLink>
+        </li>
       </ul>
     </nav>
   );

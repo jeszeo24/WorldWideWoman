@@ -5,13 +5,17 @@ import "./App.css";
 import NavBar from "./components/NavBar";
 import ReviewView from "./views/ReviewView";
 import AddReviewView from "./views/AddReviewView";
+import UserProfileView from "./views/UserProfileView";
+import Error404View from "./views/Error404View";
 
 function App() {
   const [reviews, setReviews] = useState([]);
+  const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
     getReviews();
+    getUsers();
   }, []);
 
   async function getReviews() {
@@ -19,6 +23,17 @@ function App() {
       .then((response) => response.json())
       .then((reviews) => {
         setReviews(reviews);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  async function getUsers() {
+    await fetch("/users")
+      .then((response) => response.json())
+      .then((users) => {
+        setUsers(users);
       })
       .catch((error) => {
         console.log(error);
@@ -57,6 +72,8 @@ function App() {
           path="add-reviews"
           element={<AddReviewView addReviewCb={addReview} />}
         />
+        <Route path="users/:id" element={<UserProfileView users={users} />} />
+        <Route path="bad-route" element={<Error404View />} />
       </Routes>
     </div>
   );

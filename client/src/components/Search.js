@@ -17,9 +17,11 @@ function Search(props) {
   return (
     <form className="search" onSubmit={handleSubmit}>
       Search City:
-      <input id="search" onChange={(e) => handleChange(e)} />
+      <input value={input} name="search" onChange={(e) => handleChange(e)} />
       <button type="submit">Search</button>
-      <button onClick={props.resetAllCb}>Reset All</button>
+      <button type="button" onClick={props.resetAllCb}>
+        Reset All
+      </button>
     </form>
   );
 }
