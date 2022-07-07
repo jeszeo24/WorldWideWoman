@@ -22,6 +22,7 @@ function ReviewView(props) {
     console.log(props.reviews);
   }
 
+  // Initial code for comparison and sorting
   //   function compare(a, b) {
   //     console.log(a.ratesafety);
   //     if (a.ratesafety < b.ratesafety) return -1;
@@ -35,7 +36,7 @@ function ReviewView(props) {
   //     setFilteredReviews(copyReviews);
   //   }
 
-  // refer to https://www.educative.io/answers/how-to-sort-an-array-of-objects-in-javascript
+  // Referred to https://www.educative.io/answers/how-to-sort-an-array-of-objects-in-javascript
   function dynamicsort(property, order) {
     let sort_order = 1;
     if (order === "desc") {
@@ -57,13 +58,33 @@ function ReviewView(props) {
 
   function showSafety() {
     let copyReviews = [...props.reviews];
-    copyReviews.sort(dynamicsort("ratesafety", "desc"));
-    console.log(copyReviews);
+    let safetyFilter = copyReviews.sort(dynamicsort("ratesafety", "desc"));
+    setFilteredReviews(safetyFilter);
+  }
+
+  function showAffordability() {
+    let copyReviews = [...props.reviews];
+    let affordabilityFilter = copyReviews.sort(
+      dynamicsort("rateaffordability", "desc")
+    );
+    setFilteredReviews(affordabilityFilter);
+  }
+
+  function showAccessability() {
+    let copyReviews = [...props.reviews];
+    let accessabilityFilter = copyReviews.sort(
+      dynamicsort("rateaccessibility", "desc")
+    );
+    setFilteredReviews(accessabilityFilter);
   }
 
   return (
     <div>
-      <Sort showSafetyCb={showSafety} />
+      <Sort
+        showSafetyCb={showSafety}
+        showAffordabilityCb={showAffordability}
+        showAccessibilityCb={showAccessability}
+      />
       <Search filterCb={filter} resetAllCb={reset} />
       <div className="ReviewView">
         <h2>Travel Reviews</h2>
@@ -73,10 +94,11 @@ function ReviewView(props) {
             filteredReviews.map((r) => (
               <li className="box" key={r.id}>
                 <p>
-                  {r.city} {r.country} {r.traveldate}
+                  City: {r.city} Country: {r.country} {r.traveldate}
                 </p>
                 <p>
-                  {r.ratesafety} {r.rateaffordability} {r.accessibility}
+                  Safety Rating: {r.ratesafety} Affordability Rating:{" "}
+                  {r.rateaffordability} Accessibility Rating: {r.accessibility}
                 </p>
                 <p>{r.optional}</p>
                 <img

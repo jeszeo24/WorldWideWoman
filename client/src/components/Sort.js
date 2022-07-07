@@ -15,9 +15,9 @@ function Sort(props) {
 
   return (
     // refer to https://www.studytonight.com/bootstrap/solvedbootstrap-dropdown-not-working
-    <div className="dropdown">
+    <div className="dropdown my-4">
       <button
-        className="btn btn-secondary dropdown-toggle"
+        className="btn btn-primary dropdown-toggle"
         type="button"
         id="dropdownMenuButton1"
         data-bs-toggle="dropdown"
