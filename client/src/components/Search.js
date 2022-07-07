@@ -11,6 +11,7 @@ function Search(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     props.filterCb(input);
+    setInput("");
   };
 
   return (
