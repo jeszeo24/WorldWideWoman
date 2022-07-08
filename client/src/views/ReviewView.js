@@ -4,6 +4,7 @@ import Sort from "../components/Sort";
 
 function ReviewView(props) {
   const [filteredReviews, setFilteredReviews] = useState([]);
+  const [likes, setLikes] = useState(0);
 
   useEffect(() => {
     setFilteredReviews(props.reviews);
@@ -78,15 +79,20 @@ function ReviewView(props) {
     setFilteredReviews(accessabilityFilter);
   }
 
+  //Question: what happens if I want it to maintain that state?
+  const handleClick = () => {
+    setLikes(likes + 1);
+  };
+
   return (
-    <div>
+    <div className="container-fluid">
       <Sort
         showSafetyCb={showSafety}
         showAffordabilityCb={showAffordability}
         showAccessibilityCb={showAccessability}
       />
       <Search filterCb={filter} resetAllCb={reset} />
-      <div className="ReviewView">
+      <div className="ReviewView container-fluid">
         <h2>Travel Reviews</h2>
         <ul>
           {
@@ -100,6 +106,7 @@ function ReviewView(props) {
                   Safety Rating: {r.ratesafety} Affordability Rating:{" "}
                   {r.rateaffordability} Accessibility Rating: {r.accessibility}
                 </p>
+                <p>{r.username}</p>
                 <p>{r.optional}</p>
                 <img
                   src={r.photos ? r.photos : "https://picsum.photos/200/300"}
@@ -107,6 +114,9 @@ function ReviewView(props) {
               </li>
             ))
           }
+          <button className="like-button" onClick={handleClick}>
+            <span className="likes-counter">{`Like | ${likes}`}</span>
+          </button>
         </ul>
       </div>
     </div>

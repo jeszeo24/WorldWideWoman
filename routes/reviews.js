@@ -41,12 +41,13 @@ router.post("/", async (req, res) => {
     rateaffordability,
     rateaccessibility,
     photos,
+    username,
     optional,
   } = req.body;
   try {
     const post = await db(
-      `INSERT INTO reviews (city, country, traveldate, ratesafety, rateaffordability, rateaccessibility, photos, optional) 
-      VALUES ('${city}', '${country}', '${traveldate}', '${ratesafety}', '${rateaffordability}', '${rateaccessibility}', '${photos}', '${optional}');`
+      `INSERT INTO reviews (city, country, traveldate, ratesafety, rateaffordability, rateaccessibility, photos, username, optional) 
+      VALUES ('${city}', '${country}', '${traveldate}', '${ratesafety}', '${rateaffordability}', '${rateaccessibility}', '${photos}', '${username}', '${optional}');`
     );
     const results = await db("SELECT * FROM reviews;");
 

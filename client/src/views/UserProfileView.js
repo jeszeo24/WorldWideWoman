@@ -22,6 +22,16 @@ function UserProfileView(props) {
           <p>
             Welcome to the profile of {user.preferredname} with ID {user.id}
           </p>
+          <ul className="box">
+            <li>Age: {user.age}</li>
+            <li>Favorite Destination: {user.favedestination}</li>
+            <li>Likes: {user.likes}</li>
+            <li>Instagram: {user.instagram}</li>
+            <li>
+              Profile Photo:
+              <img src={user.profilephoto} />
+            </li>
+          </ul>
           <Link to="/users">back</Link>
         </>
       )}
