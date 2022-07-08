@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Search from "../components/Search";
 import Sort from "../components/Sort";
+// FaStar is a star icon  imported from the React Icon library
 import { FaStar } from "react-icons/fa";
 
 function ReviewView(props) {
@@ -24,7 +25,7 @@ function ReviewView(props) {
     console.log(props.reviews);
   }
 
-  // Initial code for comparison and sorting
+  // Initial code for comparison and sorting, but only covers one property
   //   function compare(a, b) {
   //     console.log(a.ratesafety);
   //     if (a.ratesafety < b.ratesafety) return -1;
@@ -39,6 +40,7 @@ function ReviewView(props) {
   //   }
 
   // Referred to https://www.educative.io/answers/how-to-sort-an-array-of-objects-in-javascript
+  //   for a more generic sort function
   function dynamicsort(property, order) {
     let sort_order = 1;
     if (order === "desc") {
@@ -85,6 +87,19 @@ function ReviewView(props) {
     setLikes(likes + 1);
   };
 
+  function convertDbDateToHuman(dbDateTime) {
+    // Create a date obj
+    let dateObj = new Date(dbDateTime);
+
+    // Convert it to a (long) human readable format
+    let humanReadable = dateObj.toString(); // 'Fri Jul 08 2022 00:00:00 GMT+0200'
+
+    // I only want to keep the date part of it
+    let humanDate = humanReadable.substring(4, 15); // 'Jul 08 2022'
+
+    return humanDate;
+  }
+
   return (
     <div className="container-fluid">
       <h2>Travel Reviews</h2>
@@ -103,22 +118,28 @@ function ReviewView(props) {
         <ul>
           {filteredReviews.map((r) => (
             <li className="box" key={r.id}>
-              <div class="container">
+              <div className="container">
                 <div className="row">
                   <div className="col">
                     <img
                       className="photo"
                       src={
-                        r.photos ? r.photos : "https://picsum.photos/200/300"
+                        r.photos
+                          ? r.photos
+                          : "https://media.istockphoto.com/vectors/no-image-available-sign-vector-id922962354?k=20&m=922962354&s=612x612&w=0&h=f-9tPXlFXtz9vg_-WonCXKCdBuPUevOBkp3DQ-i0xqo="
                       }
                     />
                   </div>
                   <div className="col">
+                    <div className="row">
+                      <div className="col-sm-3">City: {r.city}</div>
+                      <div className="col-sm-3">Country: {r.country}</div>
+                      <div className="col-sm-6">
+                        {convertDbDateToHuman(r.traveldate)}
+                      </div>
+                    </div>
                     <p>
-                      City: {r.city} Country: {r.country} {r.traveldate}
-                    </p>
-                    <p>
-                      Safety Rating:
+                      Safety Rating:{" "}
                       {[...Array(r.ratesafety)].map((star, i) => (
                         <FaStar
                           className="star"
@@ -127,6 +148,8 @@ function ReviewView(props) {
                           key={i}
                         />
                       ))}{" "}
+                    </p>
+                    <p>
                       Affordability Rating:{" "}
                       {[...Array(r.rateaffordability)].map((star, i) => (
                         <FaStar
@@ -136,6 +159,8 @@ function ReviewView(props) {
                           key={i}
                         />
                       ))}{" "}
+                    </p>
+                    <p>
                       Accessibility Rating:{" "}
                       {[...Array(r.rateaccessibility)].map((star, i) => (
                         <FaStar
@@ -146,8 +171,11 @@ function ReviewView(props) {
                         />
                       ))}{" "}
                     </p>
-                    <p>Username of Reviewer: {r.username}</p>
-                    <p>{r.optional}</p>
+                    {/* // does not work yet because review does not have User ID tied to it */}
+                    <p onClick={(e) => props.redirectToUserCb(r.id)}>
+                      Reviewer: {r.username}
+                    </p>
+                    <p>Notes: {r.optional}</p>
                   </div>
                 </div>
               </div>

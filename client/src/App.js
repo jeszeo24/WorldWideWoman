@@ -60,6 +60,14 @@ function App() {
     }
   }
 
+  {
+    /* // does not work yet because review does not have User ID tied to it */
+  }
+  function redirectToUser(id) {
+    setUsers(null);
+    getUsers(id);
+  }
+
   return (
     <div className="App">
       <h1>World Wide Women</h1>
@@ -72,7 +80,12 @@ function App() {
           path="add-reviews"
           element={<AddReviewView addReviewCb={addReview} />}
         />
-        <Route path="users/:id" element={<UserProfileView users={users} />} />
+        <Route
+          path="users/:id"
+          element={
+            <UserProfileView users={users} redirectToUserCb={redirectToUser} />
+          }
+        />
         <Route path="bad-route" element={<Error404View />} />
       </Routes>
     </div>

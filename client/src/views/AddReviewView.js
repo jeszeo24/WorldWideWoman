@@ -38,7 +38,7 @@ function AddReviewView(props) {
       <h2>Add Review</h2>
       <form onSubmit={handleSubmit} className="box">
         <div className="row">
-          <div className="col">
+          <div className="col-sm-3">
             <label>
               City
               <input
@@ -49,7 +49,9 @@ function AddReviewView(props) {
                 required
               />
             </label>
+          </div>
 
+          <div className="col-sm-3">
             <label>
               Country
               <input
@@ -60,7 +62,9 @@ function AddReviewView(props) {
                 required
               />
             </label>
+          </div>
 
+          <div className="col-sm-6">
             <label>
               Travel Date
               <input
