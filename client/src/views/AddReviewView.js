@@ -24,6 +24,7 @@ function AddReviewView(props) {
   function handleSubmit(event) {
     event.preventDefault();
     props.addReviewCb(formData);
+    alert("Thank you for sharing your review!");
     setFormData(EMPTY_FORM);
   }
 
