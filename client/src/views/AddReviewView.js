@@ -1,12 +1,13 @@
 import React, { useState } from "react";
+import StarRating from "../components/StarRating";
 
 const EMPTY_FORM = {
   city: "",
   country: "",
   traveldate: "",
-  ratesafety: "",
-  rateaffordability: "",
-  rateaccessibility: "",
+  ratesafety: 0,
+  rateaffordability: 0,
+  rateaccessibility: 0,
   photos: "",
   username: "",
   optional: "",
@@ -19,6 +20,10 @@ function AddReviewView(props) {
     let { name, value } = event.target;
 
     setFormData((data) => ({ ...data, [name]: value }));
+  }
+
+  function handleStarClick(name, rating) {
+    setFormData((data) => ({ ...data, [name]: rating }));
   }
 
   function handleSubmit(event) {
@@ -70,39 +75,27 @@ function AddReviewView(props) {
 
           <label>
             Safety Rating
-            <input
+            <StarRating
               name="ratesafety"
-              type="number"
-              min="0"
-              max="5"
-              value={formData.ratesafety}
-              onChange={handleChange}
+              starClickCb={handleStarClick}
               required
             />
           </label>
 
           <label>
             Affordability Rating
-            <input
+            <StarRating
               name="rateaffordability"
-              type="number"
-              min="0"
-              max="5"
-              value={formData.rateaffordability}
-              onChange={handleChange}
+              starClickCb={handleStarClick}
               required
             />
           </label>
 
           <label>
             Accessibility Rating
-            <input
+            <StarRating
               name="rateaccessibility"
-              type="number"
-              min="0"
-              max="5"
-              value={formData.rateaccessibility}
-              onChange={handleChange}
+              starClickCb={handleStarClick}
               required
             />
           </label>

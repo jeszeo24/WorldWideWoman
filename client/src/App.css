@@ -49,16 +49,32 @@
   border: black ridge 1px;
   border-radius: 10px;
   margin: 15px;
-  width: 50rem;
+  display: flex;
   padding-left: 10px;
   background-color: whitesmoke;
   padding: 25px 25px 25px 25px;
 }
 
 .search {
-  width: 30%;
+  width: 70%;
 }
 
 ul li {
   font-size: 20px;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+.star {
+  cursor: pointer;
+  transition: color 200ms;
+}
+
+.photo {
+  height: 300px;
+  width: 300px;
+  /* how do I ensure the image is flexible as well? */
+  display: flex;
 }

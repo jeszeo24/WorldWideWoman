@@ -42,7 +42,7 @@ function Sort(props) {
         </li>
         <li>
           <a
-            onClick={props.showAccessabilityCb}
+            onClick={props.showAccessibilityCb}
             className="dropdown-item"
             href="#"
           >

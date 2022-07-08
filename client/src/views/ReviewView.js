@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Search from "../components/Search";
 import Sort from "../components/Sort";
+import { FaStar } from "react-icons/fa";
 
 function ReviewView(props) {
   const [filteredReviews, setFilteredReviews] = useState([]);
@@ -71,7 +72,7 @@ function ReviewView(props) {
     setFilteredReviews(affordabilityFilter);
   }
 
-  function showAccessability() {
+  function showAccessibility() {
     let copyReviews = [...props.reviews];
     let accessabilityFilter = copyReviews.sort(
       dynamicsort("rateaccessibility", "desc")
@@ -86,34 +87,72 @@ function ReviewView(props) {
 
   return (
     <div className="container-fluid">
-      <Sort
-        showSafetyCb={showSafety}
-        showAffordabilityCb={showAffordability}
-        showAccessibilityCb={showAccessability}
-      />
-      <Search filterCb={filter} resetAllCb={reset} />
-      <div className="ReviewView container-fluid">
-        <h2>Travel Reviews</h2>
+      <h2>Travel Reviews</h2>
+      <div className="row">
+        <div className="col">
+          <Search filterCb={filter} resetAllCb={reset} />
+        </div>
+        <div className="col">
+          <Sort
+            showSafetyCb={showSafety}
+            showAffordabilityCb={showAffordability}
+            showAccessibilityCb={showAccessibility}
+          />
+        </div>
+        <div className="ReviewView container-fluid"></div>
         <ul>
-          {
-            //filteredReviews
-            filteredReviews.map((r) => (
-              <li className="box" key={r.id}>
-                <p>
-                  City: {r.city} Country: {r.country} {r.traveldate}
-                </p>
-                <p>
-                  Safety Rating: {r.ratesafety} Affordability Rating:{" "}
-                  {r.rateaffordability} Accessibility Rating: {r.accessibility}
-                </p>
-                <p>{r.username}</p>
-                <p>{r.optional}</p>
-                <img
-                  src={r.photos ? r.photos : "https://picsum.photos/200/300"}
-                />
-              </li>
-            ))
-          }
+          {filteredReviews.map((r) => (
+            <li className="box" key={r.id}>
+              <div class="container">
+                <div className="row">
+                  <div className="col">
+                    <img
+                      className="photo"
+                      src={
+                        r.photos ? r.photos : "https://picsum.photos/200/300"
+                      }
+                    />
+                  </div>
+                  <div className="col">
+                    <p>
+                      City: {r.city} Country: {r.country} {r.traveldate}
+                    </p>
+                    <p>
+                      Safety Rating:
+                      {[...Array(r.ratesafety)].map((star, i) => (
+                        <FaStar
+                          className="star"
+                          color="#ffc107"
+                          size={40}
+                          key={i}
+                        />
+                      ))}{" "}
+                      Affordability Rating:{" "}
+                      {[...Array(r.rateaffordability)].map((star, i) => (
+                        <FaStar
+                          className="star"
+                          color="#ffc107"
+                          size={40}
+                          key={i}
+                        />
+                      ))}{" "}
+                      Accessibility Rating:{" "}
+                      {[...Array(r.rateaccessibility)].map((star, i) => (
+                        <FaStar
+                          className="star"
+                          color="#ffc107"
+                          size={40}
+                          key={i}
+                        />
+                      ))}{" "}
+                    </p>
+                    <p>Username of Reviewer: {r.username}</p>
+                    <p>{r.optional}</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+          ))}
           <button className="like-button" onClick={handleClick}>
             <span className="likes-counter">{`Like | ${likes}`}</span>
           </button>
