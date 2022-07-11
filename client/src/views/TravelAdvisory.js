@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+// const countrydata = require("../public/alpha2.json");
 
 function TravelAdvisory(props) {
-  const [location, setLocation] = useState("Barcelona");
-  const [advisory, setAdvisory] = useState(null);
+  const [location, setLocation] = useState("");
 
   function handleChange(event) {
     setLocation(event.target.value);
@@ -10,25 +10,36 @@ function TravelAdvisory(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    props.getLocationCb(location);
+    props.advisoryCb(location);
   }
 
   return (
     <div className="container-fluid">
-      <h2>Travel Advisory in {location}</h2>
+      <h2 id="traveladvisory">Travel Advisory in {location}</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div id="countryinput">
           <input
             className="mb-2"
             value={location}
             onChange={(event) => handleChange(event)}
           />
         </div>
-        <button className="btn btn-primary mb-2">Get travel advisory</button>
+        <button id="advisorybutton" className="btn btn-primary mb-2">
+          Get travel advisory
+        </button>
       </form>
-      The advisory message is:{" "}
-      {advisory && advisory.advisory && advisory.advisory.message}
-      <br />
+      <div className="box">
+        <div>
+          <strong>The advisory message is:</strong>
+        </div>
+        <div>
+          {props.advisories &&
+            props.advisories.data &&
+            props.advisories.data[location] &&
+            props.advisories.data[location].advisory &&
+            props.advisories.data[location].advisory.message}
+        </div>
+      </div>
     </div>
   );
 }

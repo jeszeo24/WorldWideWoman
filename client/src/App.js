@@ -43,17 +43,6 @@ function App() {
       });
   }
 
-  async function getAdvisories() {
-    await fetch("https://www.travel-advisory.info/api")
-      .then((response) => response.json())
-      .then((advisories) => {
-        setAdvisories(advisories);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
   async function addReview(newReview) {
     let options = {
       method: "POST",
@@ -72,6 +61,17 @@ function App() {
     } catch (error) {
       setError(error.message);
     }
+  }
+
+  async function getAdvisories(location) {
+    await fetch(`https://www.travel-advisory.info/api?countrycode=${location}`)
+      .then((response) => response.json())
+      .then((advisories) => {
+        setAdvisories(advisories);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   {
@@ -102,7 +102,12 @@ function App() {
         />
         <Route
           path="advisory"
-          element={<TravelAdvisory advisory={advisories} />}
+          element={
+            <TravelAdvisory
+              advisories={advisories}
+              advisoryCb={(location) => getAdvisories(location)}
+            />
+          }
         />
         <Route path="bad-route" element={<Error404View />} />
       </Routes>
