@@ -4,6 +4,7 @@ var router = express.Router();
 const db = require("../model/helper");
 
 /* GET users */
+// Not being used at the moment
 router.get("/", async function (req, res, next) {
   try {
     const results = await db("SELECT * FROM users;");
@@ -15,6 +16,8 @@ router.get("/", async function (req, res, next) {
 });
 
 /* GET one user */
+// Using only this to show future possibilities
+// feature of linking review to user profile is not currently available
 router.get("/:id", async (req, res) => {
   try {
     const results = await db(`SELECT * FROM users WHERE id=${req.params.id};`);
@@ -30,6 +33,7 @@ router.get("/:id", async (req, res) => {
 });
 
 /* INSERT a new user into the DB */
+// Not being used at the moment, entering information via SQL
 router.post("/", async (req, res) => {
   const {
     preferredname,

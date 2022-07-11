@@ -30,6 +30,7 @@ function UserProfileView(props) {
               <li>Instagram: {user.instagram}</li>
               <li>
                 Profile Photo:
+                <br />
                 <img src={user.profilephoto} />
               </li>
             </ul>

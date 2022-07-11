@@ -5,7 +5,7 @@ const EMPTY_FORM = {
   city: "",
   country: "",
   traveldate: "",
-  ratesafety: "",
+  ratesafety: 0,
   rateaffordability: 0,
   rateaccessibility: 0,
   photos: "",

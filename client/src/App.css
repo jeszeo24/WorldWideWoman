@@ -150,3 +150,23 @@ input[type="radio"] {
   text-align: right;
   padding-right: 10px;
 }
+
+#traveladvisory {
+  margin-left: 15px;
+}
+
+#countryinput {
+  margin-left: 15px;
+  width: 170px;
+}
+
+#advisorybutton {
+  margin-left: 15px;
+  width: 170px;
+}
+
+#advisorypic {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

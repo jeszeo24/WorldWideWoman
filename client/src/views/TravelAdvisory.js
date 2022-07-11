@@ -17,8 +17,9 @@ function TravelAdvisory(props) {
     <div className="container-fluid">
       <h2 id="traveladvisory">Travel Advisory in {location}</h2>
       <form onSubmit={handleSubmit}>
-        <div id="countryinput">
+        <div>
           <input
+            id="countryinput"
             className="mb-2"
             value={location}
             onChange={(event) => handleChange(event)}
@@ -29,17 +30,17 @@ function TravelAdvisory(props) {
         </button>
       </form>
       <div className="box">
-        <div>
-          <strong>The advisory message is:</strong>
-        </div>
-        <div>
-          {props.advisories &&
-            props.advisories.data &&
-            props.advisories.data[location] &&
-            props.advisories.data[location].advisory &&
-            props.advisories.data[location].advisory.message}
-        </div>
+        <strong>The advisory message is:</strong>
+        {props.advisories &&
+          props.advisories.data &&
+          props.advisories.data[location] &&
+          props.advisories.data[location].advisory &&
+          props.advisories.data[location].advisory.message}
       </div>
+      <img
+        id="advisorypic"
+        src="https://www.nevispages.com/wp-content/uploads/2021/07/travel.jpg"
+      />
     </div>
   );
 }
