@@ -18,21 +18,27 @@ function UserProfileView(props) {
       {user && (
         <>
           {/* React needs a parent node to wrap it */}
-          <h2>Profile of {user.preferredname}</h2>
+          <h2>Profile of WWW Traveller {user.preferredname}</h2>
           <p>
-            Welcome to the profile of {user.preferredname} with ID {user.id}
+            Welcome to the profile {user.preferredname} with ID {user.id}
           </p>
-          <ul className="box">
-            <li>Age: {user.age}</li>
-            <li>Favorite Destination: {user.favedestination}</li>
-            <li>Likes: {user.likes}</li>
-            <li>Instagram: {user.instagram}</li>
-            <li>
-              Profile Photo:
-              <img src={user.profilephoto} />
-            </li>
-          </ul>
-          <Link to="/users">back</Link>
+          <div className="box">
+            <ul>
+              <li>Age: {user.age}</li>
+              <li>Favorite Destination: {user.favedestination}</li>
+              <li>Likes: {user.likes}</li>
+              <li>Instagram: {user.instagram}</li>
+              <li>
+                Profile Photo:
+                <img src={user.profilephoto} />
+              </li>
+            </ul>
+          </div>
+          <div id="backlink">
+            <button>
+              <Link to="/">back</Link>
+            </button>
+          </div>
         </>
       )}
     </div>

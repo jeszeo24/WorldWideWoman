@@ -5,7 +5,7 @@ const EMPTY_FORM = {
   city: "",
   country: "",
   traveldate: "",
-  ratesafety: 0,
+  ratesafety: "",
   rateaffordability: 0,
   rateaccessibility: 0,
   photos: "",
@@ -35,105 +35,126 @@ function AddReviewView(props) {
 
   return (
     <div className="AddReviewView">
-      <h2>Add Review</h2>
+      <h2 id="addreview">Add Travel Review</h2>
       <form onSubmit={handleSubmit} className="box">
-        <div className="row">
-          <div className="col-sm-3">
+        <div>
+          <div id="firstrowaddreview" className="row">
+            <div className="col-sm-4">
+              <label>
+                City {""}
+                <input
+                  id="city"
+                  name="city"
+                  type="text"
+                  value={formData.city}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+            </div>
+
+            <div className="col-sm-4">
+              <label>
+                Country {""}
+                <input
+                  id="country"
+                  name="country"
+                  type="text"
+                  value={formData.country}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+            </div>
+
+            <div className="col-sm-4">
+              <label>
+                Travel Date {""}
+                <input
+                  id="traveldate"
+                  name="traveldate"
+                  type="date"
+                  value={formData.traveldate}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+            </div>
+          </div>
+
+          <div id="addsafetyrating">
             <label>
-              City
+              Safety Rating
+              <StarRating
+                name="ratesafety"
+                starClickCb={handleStarClick}
+                required
+              />
+            </label>
+          </div>
+
+          <div id="addaffordrating">
+            <label>
+              Affordability Rating
+              <StarRating
+                name="rateaffordability"
+                starClickCb={handleStarClick}
+                required
+              />
+            </label>
+          </div>
+
+          <div id="addaccessrating">
+            <label>
+              Accessibility Rating
+              <StarRating
+                name="rateaccessibility"
+                starClickCb={handleStarClick}
+                required
+              />
+            </label>
+          </div>
+
+          <div id="addphotos">
+            <label>
+              Photos {""}
               <input
-                name="city"
+                id="photos"
+                name="photos"
+                type="url"
+                value={formData.photos}
+                onChange={handleChange}
+              />
+            </label>
+          </div>
+
+          <div id="addusername">
+            <label>
+              Username {""}
+              <input
+                id="username"
+                name="username"
                 type="text"
-                value={formData.city}
+                value={formData.username}
                 onChange={handleChange}
                 required
               />
             </label>
           </div>
 
-          <div className="col-sm-3">
+          <div id="addnotes">
             <label>
-              Country
+              Optional Additional Notes
+              <br />
               <input
-                name="country"
+                id="optional"
+                name="optional"
                 type="text"
-                value={formData.country}
+                value={formData.optional}
                 onChange={handleChange}
-                required
               />
             </label>
           </div>
-
-          <div className="col-sm-6">
-            <label>
-              Travel Date
-              <input
-                name="traveldate"
-                type="date"
-                value={formData.traveldate}
-                onChange={handleChange}
-                required
-              />
-            </label>
-          </div>
-
-          <label>
-            Safety Rating
-            <StarRating
-              name="ratesafety"
-              starClickCb={handleStarClick}
-              required
-            />
-          </label>
-
-          <label>
-            Affordability Rating
-            <StarRating
-              name="rateaffordability"
-              starClickCb={handleStarClick}
-              required
-            />
-          </label>
-
-          <label>
-            Accessibility Rating
-            <StarRating
-              name="rateaccessibility"
-              starClickCb={handleStarClick}
-              required
-            />
-          </label>
-
-          <label>
-            Photos
-            <input
-              name="photos"
-              type="url"
-              value={formData.photos}
-              onChange={handleChange}
-            />
-          </label>
-
-          <label>
-            Username
-            <input
-              name="username"
-              type="text"
-              value={formData.username}
-              onChange={handleChange}
-              required
-            />
-          </label>
-
-          <label>
-            Optional Additional Notes
-            <input
-              name="optional"
-              type="text"
-              value={formData.optional}
-              onChange={handleChange}
-            />
-          </label>
 
           <button type="submit">Add Review</button>
         </div>

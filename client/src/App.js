@@ -7,15 +7,18 @@ import ReviewView from "./views/ReviewView";
 import AddReviewView from "./views/AddReviewView";
 import UserProfileView from "./views/UserProfileView";
 import Error404View from "./views/Error404View";
+import TravelAdvisory from "./views/TravelAdvisory";
 
 function App() {
   const [reviews, setReviews] = useState([]);
   const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
+  const [advisories, setAdvisories] = useState([]);
 
   useEffect(() => {
     getReviews();
     getUsers();
+    getAdvisories();
   }, []);
 
   async function getReviews() {
@@ -34,6 +37,17 @@ function App() {
       .then((response) => response.json())
       .then((users) => {
         setUsers(users);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  async function getAdvisories() {
+    await fetch("https://www.travel-advisory.info/api")
+      .then((response) => response.json())
+      .then((advisories) => {
+        setAdvisories(advisories);
       })
       .catch((error) => {
         console.log(error);
@@ -85,6 +99,10 @@ function App() {
           element={
             <UserProfileView users={users} redirectToUserCb={redirectToUser} />
           }
+        />
+        <Route
+          path="advisory"
+          element={<TravelAdvisory advisory={advisories} />}
         />
         <Route path="bad-route" element={<Error404View />} />
       </Routes>

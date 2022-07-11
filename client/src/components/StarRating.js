@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 
 function StarRating(props) {
+  // Learned from https://www.youtube.com/watch?v=eDw46GYAIDQ&ab_channel=EricMurphy
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
 

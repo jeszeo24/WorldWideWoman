@@ -87,6 +87,7 @@ function ReviewView(props) {
     setLikes(likes + 1);
   };
 
+  // Courtesy of Jim!
   function convertDbDateToHuman(dbDateTime) {
     // Create a date obj
     let dateObj = new Date(dbDateTime);
@@ -102,90 +103,96 @@ function ReviewView(props) {
 
   return (
     <div className="container-fluid">
-      <h2>Travel Reviews</h2>
-      <div className="row">
-        <div className="col">
+      <div className="travelreviews">
+        <h2>Travel Reviews</h2>
+      </div>
+      <div className="row" id="headerrow">
+        <div className="col-sm-8" id="search">
           <Search filterCb={filter} resetAllCb={reset} />
         </div>
-        <div className="col">
+        <div className="col-sm-4" id="sortdropdown">
           <Sort
             showSafetyCb={showSafety}
             showAffordabilityCb={showAffordability}
             showAccessibilityCb={showAccessibility}
           />
         </div>
-        <div className="ReviewView container-fluid"></div>
-        <ul>
-          {filteredReviews.map((r) => (
-            <li className="box" key={r.id}>
-              <div className="container">
-                <div className="row">
-                  <div className="col">
-                    <img
-                      className="photo"
-                      src={
-                        r.photos
-                          ? r.photos
-                          : "https://media.istockphoto.com/vectors/no-image-available-sign-vector-id922962354?k=20&m=922962354&s=612x612&w=0&h=f-9tPXlFXtz9vg_-WonCXKCdBuPUevOBkp3DQ-i0xqo="
-                      }
-                    />
+      </div>
+      <div className="ReviewView container-fluid"></div>
+      {filteredReviews.map((r) => (
+        <div className="box" key={r.id}>
+          <div className="container">
+            <div className="row">
+              <div className="col">
+                <img
+                  className="photo"
+                  src={
+                    r.photos
+                      ? r.photos
+                      : "https://media.istockphoto.com/vectors/no-image-available-sign-vector-id922962354?k=20&m=922962354&s=612x612&w=0&h=f-9tPXlFXtz9vg_-WonCXKCdBuPUevOBkp3DQ-i0xqo="
+                  }
+                />
+              </div>
+              <div className="col">
+                <div className="row" id="firstrow">
+                  <div className="col-sm-4">
+                    <strong>City:</strong> {r.city}
                   </div>
-                  <div className="col">
-                    <div className="row">
-                      <div className="col-sm-3">City: {r.city}</div>
-                      <div className="col-sm-3">Country: {r.country}</div>
-                      <div className="col-sm-6">
-                        {convertDbDateToHuman(r.traveldate)}
-                      </div>
-                    </div>
-                    <p>
-                      Safety Rating:{" "}
-                      {[...Array(r.ratesafety)].map((star, i) => (
-                        <FaStar
-                          className="star"
-                          color="#ffc107"
-                          size={40}
-                          key={i}
-                        />
-                      ))}{" "}
-                    </p>
-                    <p>
-                      Affordability Rating:{" "}
-                      {[...Array(r.rateaffordability)].map((star, i) => (
-                        <FaStar
-                          className="star"
-                          color="#ffc107"
-                          size={40}
-                          key={i}
-                        />
-                      ))}{" "}
-                    </p>
-                    <p>
-                      Accessibility Rating:{" "}
-                      {[...Array(r.rateaccessibility)].map((star, i) => (
-                        <FaStar
-                          className="star"
-                          color="#ffc107"
-                          size={40}
-                          key={i}
-                        />
-                      ))}{" "}
-                    </p>
-                    {/* // does not work yet because review does not have User ID tied to it */}
-                    <p onClick={(e) => props.redirectToUserCb(r.id)}>
-                      Reviewer: {r.username}
-                    </p>
-                    <p>Notes: {r.optional}</p>
+                  <div className="col-sm-4">
+                    <strong>Country:</strong> {r.country}
+                  </div>
+                  <div className="col-sm-4">
+                    {convertDbDateToHuman(r.traveldate)}
                   </div>
                 </div>
+                <p>
+                  <strong>Safety Rating:</strong>{" "}
+                  {[...Array(r.ratesafety)].map((star, i) => (
+                    <FaStar
+                      className="star"
+                      color="#ffc107"
+                      size={40}
+                      key={i}
+                    />
+                  ))}{" "}
+                </p>
+                <p>
+                  <strong>Affordability Rating:</strong>{" "}
+                  {[...Array(r.rateaffordability)].map((star, i) => (
+                    <FaStar
+                      className="star"
+                      color="#ffc107"
+                      size={40}
+                      key={i}
+                    />
+                  ))}{" "}
+                </p>
+                <p>
+                  <strong>Accessibility Rating:</strong>{" "}
+                  {[...Array(r.rateaccessibility)].map((star, i) => (
+                    <FaStar
+                      className="star"
+                      color="#ffc107"
+                      size={40}
+                      key={i}
+                    />
+                  ))}{" "}
+                </p>
+                {/* // does not work yet because review does not have User ID tied to it */}
+                <p onClick={(e) => props.redirectToUserCb(r.id)}>
+                  <strong>Reviewer:</strong> {r.username}
+                </p>
+                <p>
+                  <strong>Notes:</strong> {r.optional}
+                </p>
               </div>
-            </li>
-          ))}
-          <button className="like-button" onClick={handleClick}>
-            <span className="likes-counter">{`Like | ${likes}`}</span>
-          </button>
-        </ul>
-      </div>
+            </div>
+          </div>
+        </div>
+      ))}
+      <button className="like-button" onClick={handleClick}>
+        <span className="likes-counter">{`Like | ${likes}`}</span>
+      </button>
     </div>
   );
 }

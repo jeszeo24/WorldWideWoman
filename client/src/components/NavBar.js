@@ -4,7 +4,8 @@ import "./NavBar.css";
 
 function NavBar() {
   return (
-    <nav className="navbar navbar-expand-md bg-light col-sm-10">
+    <nav className="navbar navbar-expand-md bg-light">
+      {/* "navbar navbar-expand-md bg-light col-sm-11" */}
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
           WWW
@@ -25,6 +26,7 @@ function NavBar() {
             <NavLink to="/">Reviews</NavLink>
             <NavLink to="add-reviews">Add Reviews</NavLink>
             <NavLink to="users">Login</NavLink>
+            <NavLink to="advisory">Travel Advisory</NavLink>
             <NavLink to="bad-route">Bad!</NavLink>
           </div>
         </div>
