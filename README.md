@@ -8,6 +8,8 @@ Using the technologies of React, Node/Express, and MySQL, to add and display tra
 
 Run `npm run install` in the project folder to install dependencies related to Express (the server).
 
+Run `npm install react-icons` in the project folder to install the react icon package which will provide the star icon used
+
 `cd client` and run `npm run install` install dependencies related to React (the client).
 
 ### Database Prep
