@@ -12,15 +12,25 @@ Run `npm run install` in the project folder to install dependencies related to E
 
 ### Database Prep
 
-Type `mysql -u root -p` to access the MySQL CLI using the password `root`.
+- Access the MySQL interface in your terminal by running `mysql -u root -p`
+- Create a new database called reviews: `create database reviews`
+- Add a `.env` file to the project folder of this repository containing the MySQL authentication information for MySQL user. For example:
 
-Type `npm run migrate` in your **TERMINAL**, in the **project** folder (not your MySQL CLI! Open a new terminal window for this). This will create a table called 'reviews' and 'users' in your database.
+```bash
+  DB_HOST=localhost
+  DB_USER=root
+  DB_NAME=reviews
+  DB_PASS=YOURPASSWORD
+```
+
+- Run `npm run migrate` in the project folder of this repository, in a new terminal window. This will create a table called 'students' in your database.
+
+- Make sure you understand how the `reviews` table is constructed. In your MySQL console, you can run `use reviews;` and then `describe reviews;` to see the structure of the reviews table.
 
 ### Run Your Development Servers
 
-- Run `npm run start` in project directory to start the Express server on port 5000
-- `cd client` and run `npm run start` to start client server in development mode with hot reloading in port 3000.
-- Client is configured so all API calls will be proxied to port 5000 for a smoother development experience. Yay!
+- Run `npm start` in project directory to start the Express server on port 5000
+- In another terminal, do `cd client` and run `npm start` to start the client in development mode with hot reloading in port 3000.
 - You can test your client app in `http://localhost:3000`
 - You can test your API in `http://localhost:5000/api`
 
